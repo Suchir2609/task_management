@@ -1,0 +1,27 @@
+{% extends "tasks/base.html" %}
+{% block content %}
+<!--<h1> Welcome to patients-home </h1>-->
+<!--    <b>Appointments due</b>-->
+    {% for task in searched_priority %}
+    <article class="media content-section">
+       <div class="media-body">
+           <b class="article-title">{{ task.title }}</b>
+           <p class="article-title"> <p>
+           <p class="article-title"> Creator - {{ task.creator }} <p>
+           <p class="article-content">Description - {{ task.description }}</p>
+           <p class="article-content">Due Date - {{ task.due_date }}</p>
+           <p class="article-content">Status - {{ task.status }}</p>
+           <p class="article-content">Assigned Team Members - {{ task.assigned_team_member }}</p>
+           <b class="article-content">Priority - {{ task.priority }}</b>
+           <div class="form-group">
+           <p class="article-content"></p>
+            {% if task.status == 'Completed' %}
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'task-delete' task.id%}">Delete</a>
+            {% else %}
+          <a class="btn btn-outline-info" href =  "{% url 'task-status' task.id  %}">Update Status</a>
+            {% endif %}
+        </div>
+       </div>
+     </article>
+   {% endfor %}
+{% endblock content %}
